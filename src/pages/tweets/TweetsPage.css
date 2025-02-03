@@ -1,0 +1,8 @@
+.TweetsPage {
+    color: blue;
+} 
+
+.TweetsPage.green {
+    color: green;
+}
+
