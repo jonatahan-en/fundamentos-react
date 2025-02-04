@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import LoginPage from './pages/auth/loginPage';
 import TweetsPage from './pages/tweets/TweetsPage';
-import storage from './utils/storage';
 
 
 interface Props {
@@ -19,10 +18,12 @@ function App({defaultIsLogged}: Props) {
 		setIsLogged(false);
 	}
 
-	return isLogged ? <TweetsPage onLogout=
-	{handleLogout}/> : <LoginPage  onLogin=
-	{handleLogin}/>;
-	
+	return isLogged ? (
+		<TweetsPage onLogout={handleLogout} isLogged={isLogged}/>
+	) : (
+	<LoginPage  onLogin={handleLogin}/>
+);
+		
 }
 
 export default App;

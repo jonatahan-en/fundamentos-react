@@ -1,52 +1,41 @@
 //import clsx from 'clsx';
 //import "./TweetsPage.css";
-import { useEffect, useState } from "react";
-import Button from "../../components/Button";
-import { getlatestTweets } from "./service";
 import  styles from  "./TweetsPage.module.css";
+import { getlatestTweets } from "./service";
+import { useEffect, useState } from "react";
 import { Tweet } from "./types";
-import { logout } from "../auth/service";
+import Layout from "../../components/layout/Layout";
+import { HeaderProps } from "../../components/layout/Header";
 
-console.log(styles);
 
-interface Props {
-    onLogout: () => void;
-}
-
-function TweetsPage({ onLogout }: Props) {
-    const [tweets, setTweets] = useState<Tweet[]>([]);
+// Componente TweetsPage
+function TweetsPage(props: HeaderProps) {// Recibe Props  
+    const [tweets, setTweets] = useState<Tweet[]>([]);// tweets y setTweets son un array de Tweet
+    
     useEffect(() => {
-        getlatestTweets().then((response) => {
-            setTweets(response);
+        getlatestTweets().then((response) => {// Llama a getlatestTweets y luego a then
+            setTweets(response);// setTweets es response
         });
     }, []);
-    
-    const handleLogoutClick = async () => {
-        await logout();
-        onLogout();
 
-    };
     return (
         //<div  className={clsx('TweetsPage', { green })}>
-        <div  className={ styles.TweetsPage}>
-
-            <h1 className='text-red-300' >Twitts Page</h1>
-
-            <ul 
-            className=' border-t-teal-600 flex flex-row'
-            style={{ listStyle: "none" , padding: 0, margin: 0 }} >
-                {tweets.map((tweet)  => (
-                    <li key={tweet.id}>
-                        {tweet.content}
-                    </li>
-                ))}
-            </ul>
-            <Button
-                onClick={handleLogoutClick}
-                $variant="secondary"
-            >Logout</Button>
-            <Button $variant="primary">Primary</Button>
-        </div>
+        <Layout title="What are you thinking?" {...props}>
+            <div  className={ styles.TweetsPage}>
+                <h1 className='text-red-300' >Twitts Page</h1>
+                <ul 
+                    className=' border-t-teal-600 flex flex-row'
+                    style={{ listStyle: "none"  }} 
+                >
+                    { tweets.map((tweet)  => (
+                        <li key={tweet.id}
+                        >
+                            {tweet.content}
+                        </li>
+                    ))}
+                </ul>    
+            </div>
+        </Layout>
     );
 }
 
