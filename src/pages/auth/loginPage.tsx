@@ -1,7 +1,7 @@
 // Importaciones necesarias
 //import { FormEvent } from "react";  // Importa el tipo FormEvent para manejar eventos de formularios en React
 import React, { useState } from "react";  // Importa React y el hook useState para manejar estado
-import { ClipLoader } from "react-spinners";
+import { ClipLoader } from "react-spinners";// Importa el spinner de carga de la librería react-spinners
 import Button from "../../components/Button";  // Importa un componente de botón desde otra carpeta
 import { login } from "./service";  // Importa la función login desde el archivo service.ts
 
@@ -51,7 +51,7 @@ function LoginPage({ onLogin }: Props) {
     };
 
     // Calcula si el botón de login debe estar deshabilitado
-    const isDisabled = !username || !password || loading;  // Si falta el username o password, el botón estará deshabilitado
+    const isDisabled = !username || !password || loading;  // si no hay username, password o está cargando, deshabilita el botón
 
     return (
         <div>

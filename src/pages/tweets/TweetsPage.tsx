@@ -5,12 +5,15 @@ import Button from "../../components/Button";
 import { getlatestTweets } from "./service";
 import  styles from  "./TweetsPage.module.css";
 import { Tweet } from "./types";
+import { logout } from "../auth/service";
 
 console.log(styles);
 
+interface Props {
+    onLogout: () => void;
+}
 
-
-function TweetsPage() {
+function TweetsPage({ onLogout }: Props) {
     const [tweets, setTweets] = useState<Tweet[]>([]);
     useEffect(() => {
         getlatestTweets().then((response) => {
@@ -18,6 +21,11 @@ function TweetsPage() {
         });
     }, []);
     
+    const handleLogoutClick = async () => {
+        await logout();
+        onLogout();
+
+    };
     return (
         //<div  className={clsx('TweetsPage', { green })}>
         <div  className={ styles.TweetsPage}>
@@ -34,11 +42,9 @@ function TweetsPage() {
                 ))}
             </ul>
             <Button
-                onClick={() => {
-                    console.log("Button clicked!");
-                }}
+                onClick={handleLogoutClick}
                 $variant="secondary"
-            >Click me!</Button>
+            >Logout</Button>
             <Button $variant="primary">Primary</Button>
         </div>
     );
