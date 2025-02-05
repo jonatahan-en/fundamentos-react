@@ -1,14 +1,13 @@
+import { useAuth } from "../../pages/auth/context";
 import { logout } from "../../pages/auth/service";// Importa la función logout de service
 import Button from "../Button";// Importa el componente Button
 
-// Interfaz Props
-export interface HeaderProps {
-    onLogout: () => void;// Función onLogout
-    isLogged: boolean;// Booleano isLogged
-}
+
 
 // Componente Header
-export default function Header({ onLogout, isLogged }: HeaderProps) {// Recibe onLogout y isLogged
+export default function Header() {
+    const {isLogged,onLogout} = useAuth() 
+
     const handleLogoutClick = async () => {// Función handleLogoutClick
         await logout();// Llama a la función logout
         onLogout();// Llama a la función onLogout

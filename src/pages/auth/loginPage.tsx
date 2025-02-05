@@ -1,20 +1,20 @@
 // Importaciones necesarias
 //import { FormEvent } from "react";  // Importa el tipo FormEvent para manejar eventos de formularios en React
-import React, { useState } from "react";  // Importa React y el hook useState para manejar estado
+import { useState } from "react";  // Importa React y el hook useState para manejar estado
 import { ClipLoader } from "react-spinners";// Importa el spinner de carga de la librería react-spinners
 import Button from "../../components/Button";  // Importa un componente de botón desde otra carpeta
 import { login } from "./service";  // Importa la función login desde el archivo service.ts
+import { useAuth } from "./context";
 
-// Definición de la interfaz de las props que recibe este componente
-interface Props {
-  onLogin: (message: string) => void;  // Función que recibe un mensaje y no retorna nada
-}
+
+
 
 // Componente funcional de la página de login
-function LoginPage({ onLogin }: Props) {
+function LoginPage() {
   // Hooks para manejar el estado del username y password
   const [username, setUsername] = useState("");  // Estado para el nombre de usuario
   const [password, setPassword] = useState("");  // Estado para la contraseña
+    const { onLogin } = useAuth();
   const [loading, setLoading] = useState(false);  // Estado para mostrar un spinner de carga
 
     // Función para manejar el envío del formulario
@@ -31,7 +31,7 @@ function LoginPage({ onLogin }: Props) {
         });
 
         console.log(response);  // Muestra la respuesta de la API en la consola
-        onLogin("hello");  // Llama a la función onLogin pasando un mensaje "hello"
+        onLogin();  // Llama a la función onLogin pasando un mensaje "hello"
 
         } catch (error) {
         console.error(error);  // Muestra el error en la consola si algo sale mal

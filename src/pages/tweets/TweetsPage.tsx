@@ -5,11 +5,11 @@ import { getlatestTweets } from "./service";
 import { useEffect, useState } from "react";
 import { Tweet } from "./types";
 import Layout from "../../components/layout/Layout";
-import { HeaderProps } from "../../components/layout/Header";
+
 
 
 // Componente TweetsPage
-function TweetsPage(props: HeaderProps) {// Recibe Props  
+function TweetsPage() { 
     const [tweets, setTweets] = useState<Tweet[]>([]);// tweets y setTweets son un array de Tweet
     
     useEffect(() => {
@@ -20,7 +20,7 @@ function TweetsPage(props: HeaderProps) {// Recibe Props
 
     return (
         //<div  className={clsx('TweetsPage', { green })}>
-        <Layout title="What are you thinking?" {...props}>
+        <Layout title="What are you thinking?">
             <div  className={ styles.TweetsPage}>
                 <h1 className='text-red-300' >Twitts Page</h1>
                 <ul 
